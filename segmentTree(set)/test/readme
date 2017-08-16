@@ -15,3 +15,5 @@ test programs for segment tree:
      
     5.check_timecost_int.cpp: compare running time between segment tree and brute force method on int type.
       execution: ./check_timecost_int
+      
+    Comments are added to check_result_double.cpp file. Remaining programs follow the similar logic.
