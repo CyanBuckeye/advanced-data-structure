@@ -1,4 +1,5 @@
 test programs for segment tree:
+
     1.check_result_double.cpp: check outputs of segment tree on double type.
       execution: ./check_result_double f1 f2 //f1,f2:path to file. Write brute force method's outputs in f1
       // and segment tree query outputs in f2. (diff f1 f2)
