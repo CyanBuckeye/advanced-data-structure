@@ -1,3 +1,5 @@
+//test segment tree
+//compare time complexity between segment tree and brute force method.
 #include"segmentTree.h"
 #include<stdlib.h>
 #include<time.h>
@@ -9,6 +11,11 @@ struct test_element{
     int min_val, max_val, sum_val;
 };
 
+//test brute force method on INT:
+//input: vec: an array of INT numbers; test_round: operation times. In each round, 
+//    randomly get l1 and r1, then output the minimum, maximum and sum in range of vec[l1] ... vec[r1 - 1];
+//    then randomly get l2, r2, cg_val. Set vec[l2] ... vec[r2 - 1] to cg_val
+//output: execution time
 void brute_force_check(vector<int>& vec, int test_round) {
         srand((unsigned)time(NULL));
         size_t len = vec.size();
@@ -43,6 +50,11 @@ void brute_force_check(vector<int>& vec, int test_round) {
         cout << "time needed by brute force is " << double(end - start) / CLOCKS_PER_SEC << endl;       
 }
 
+//test segment tree on INT:
+//input: vec: an array of INT number; test_round: operation times. In each round, 
+//    randomly get l1 and r1, then output the minimum, maximum and sum in range of vec[l1] ... vec[r1 - 1];
+//    then randomly get l2, r2, cg_val. Set vec[l2] ... vec[r2 - 1] to cg_val
+//output: execution time
 void check_segTree_int(vector<int>& vec, int test_round){
     size_t len = vec.size();
     time_t start = clock();
