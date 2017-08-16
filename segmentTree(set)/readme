@@ -17,3 +17,5 @@ For your custom class, you need to overload following operators:
     1.operator >
     2.operator <
     3.operator * (const std::size_t op1, const T& op2);
+    
+compile_test.sh: shell script to compile test programs
