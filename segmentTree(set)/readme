@@ -1,1 +1,19 @@
+template class for segment tree (set operation):
+    1.constructor:
+      vector<T> vec = {a0,a1,a2,a3,a4,a5};
+      segmentTree<T>* tree = new segmentTree<T>(vec);//using vector
+      //segmentTree<T>* tree = new segmentTree<T>({a0,a1,a2,a3,a4,a5});
+      //initializer list is supported
+    2.set:
+       tree->set(2,4,a7);//{a0,a1,a2,a3,a4,a5} -> {a0,a1,a7,a7,a5,a6}
+    3.query:
+       T min_val = tree->query_min(1,4);//return minimum among a1,a2 and a3
+       T max_val = tree->query_max(1,4);//return maximum among a1,a2 and a3
+       T sum_val = tree->query_sum(1,4);//return a1+a2+a3
+       vector<T> vec = tree->query(1,4);//return minimum, maximum and sum at the same time
+                                        //vec[0]:minimum; vec[1]:maximum; vec[2]:sum
 
+For your customer class, you need to overload following operators:
+    1.operator >
+    2.operator <
+    3.operator * (const std::size_t op1, const T& op2);
