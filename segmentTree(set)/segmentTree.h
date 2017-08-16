@@ -25,6 +25,7 @@ public:
 	T query_min(const size_t L, const size_t R);
 	T query_max(const size_t L, const size_t R);
 	T query_sum(const size_t L, const size_t R);
+        std::vector<T> query(const size_t L, const size_t R); 
 	~segmentTree();
 private:
 	size_t _size;
@@ -346,3 +347,17 @@ T segmentTree<T>::query_sum(const size_t L, const size_t R)
 	return ret_val;
 }
 
+template<typename T>
+std::vector<T> segmentTree<T>::query(const size_t L, const size_t R)
+{
+        if(L >= R) throw std::runtime_error("L must be smaller than R");
+        T* ptr = new T[3];
+        bool flag = false;
+        _query_helper(ptr, &flag, 0, L, R);
+        std::vector<T> vec;
+        vec.push_back(ptr[0]);
+        vec.push_back(ptr[1]);
+        vec.push_back(ptr[2]);
+        delete []ptr;
+        return vec;
+}
