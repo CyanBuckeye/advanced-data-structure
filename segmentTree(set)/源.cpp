@@ -44,9 +44,10 @@ int main() {
 		vec.push_back(rand_val);
 	}
 	
+	time_t start = clock();
 	segmentTree<int>* tree = new segmentTree<int>(vec);
 	int min_val, max_val, sum_val, cg_val;
-	int round = 10;
+	int round = 1000;
 	for (int i = 0; i < round; i++) {
 		int L = -1, R = -1;
 		do{
@@ -55,19 +56,21 @@ int main() {
 		} while (L >= R);
 		cg_val = rand();
 		min_val = tree->query_min(L, R);
-		max_val = tree->query_max(L, R);
-		sum_val = tree->query_sum(L, R);
-		auto ans = brute_force_check(vec, L, R);
-		cout << "segment tree min_val: " << min_val << " max_val: " << max_val << " sum_val: " << sum_val << endl;
-		cout << "brute force min_val: " << ans.min_val << " max_val: " << ans.max_val << " sum_val: " << ans.sum_val << endl;
+		//max_val = tree->query_max(L, R);
+		//sum_val = tree->query_sum(L, R);
+		//auto ans = brute_force_check(vec, L, R);
+		//cout << "segment tree min_val: " << min_val << " max_val: " << max_val << " sum_val: " << sum_val << endl;
+		//cout << "brute force min_val: " << ans.min_val << " max_val: " << ans.max_val << " sum_val: " << ans.sum_val << endl;
 		do {
 			L = rand() % li_len;
 			R = rand() % li_len;
 		} while (L >= R);
 		tree->set(L, R, cg_val);
-		for (int i = L; i < R; i++)
-			vec[i] = cg_val;
+		//for (int i = L; i < R; i++)
+		//	vec[i] = cg_val;
 	} 
+	time_t end = clock();
+	cout << double(end - start) / CLOCKS_PER_SEC << endl;
 	///////////Check T == int: it works
 	return 0;
 }
