@@ -1,9 +1,16 @@
+//template class for segment tree
+//Example: for a segment tree built on an array of {1,2}, its structure is like:
+//                                              {_L: 0, _R: 3, _idx: 0, _max_val: 2, _min_val: 1, _sum_val: 3}
+//                                                /                                                      \
+//     {_L: 0, _R: 1, _idx: 1, _max_val: 1, _min_val: 1, _sum_val: 1}   {_L: 1, _R: 2,, _idx: 2, _max_val: 2, _min_val: 2, _sum_val: 2}  
+//
 #include<iostream>
 #include<math.h>
 #include<vector>
 #include<exception>
 
 template <typename T> class segmentTree;
+//template class for tree node
 template <typename T> class _segmentTree_node {
 	friend class segmentTree<T>;
 	size_t _L, _R, _Idx;
@@ -266,6 +273,7 @@ segmentTree<T>::segmentTree(const std::initializer_list<T>&& li) {
 	for (auto iter = li.begin(); iter != li.end(); iter++)
 		_assign_val(0, iter - li.begin(), iter - li.begin() + 1, *iter);
 }
+
 template<typename T>
 segmentTree<T>::segmentTree(const std::vector<T>& vec) {
 	_size = _get_size(vec);
