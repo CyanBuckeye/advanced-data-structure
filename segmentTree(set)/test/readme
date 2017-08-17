@@ -1,0 +1,17 @@
+test programs for segment tree:
+
+    1.check_result_double.cpp: check outputs of segment tree on double type.
+      execution: ./check_result_double f1 f2 //f1,f2:path to file. Write brute force method's outputs in f1
+      // and segment tree query outputs in f2. (diff f1 f2)
+    
+    2.check_result_int.cpp: check outputs of segment tree on int type.
+      execution: ./check_result_int f1 f2
+    
+    3.check_result_dumbclass.cpp: check outputs of segment tree on simple custom class.
+      execution: ./check_result_dumbclass f1 f2
+     
+    4.check_timecost_double.cpp: compare running time between segment tree and brute force method on double type.
+      execution: ./check_timecost_double
+     
+    5.check_timecost_int.cpp: compare running time between segment tree and brute force method on int type.
+      execution: ./check_timecost_int

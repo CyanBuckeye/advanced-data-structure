@@ -1,4 +1,4 @@
-#include"segmentTree.h"
+#include"../segmentTree.h"
 #include<stdlib.h>
 #include<time.h>
 #include<algorithm>
@@ -30,9 +30,9 @@ void check_result_double(vector<double>& vec, int test_round, ostream& brute_str
             if(vec[j] < min_val) min_val = vec[j];
             sum_val += vec[j];	
         }
-        brute_strm << "brute force result is: max_val: " << max_val << " min_val: " << min_val << " sum_val: " << sum_val << endl;
+        brute_strm << max_val << " " << min_val << " " << sum_val << endl;
         auto temp_ans = tree->query(L, R);
-        segtree_strm << "segment tree result is : max_val: " << temp_ans[1] << " min_val: " << temp_ans[0] << " sum_val: " << temp_ans[2] << endl;
+        segtree_strm << temp_ans[1] << " " << temp_ans[0] << " " << temp_ans[2] << endl;
         do{
             L = rand() % len;
             R = rand() % len;
