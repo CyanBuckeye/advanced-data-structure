@@ -16,16 +16,16 @@ public:
 
 template <typename T> class segmentTree {
 public:
-	typedef _segmentTree_node<T>* iterator;	
+	typedef _segmentTree_node<T>* iterator;
 	segmentTree(const std::initializer_list<T>&& li);
 	segmentTree(const std::vector<T>& vec);
-	//segmentTree(segmentTree<T>&& tree) noexcept;
+	segmentTree(segmentTree<T>&& tree) noexcept;
 	void set(const size_t L, const size_t R, const T& _set_val);
 	void set(const size_t L, const size_t R, const T&& _set_val);
 	T query_min(const size_t L, const size_t R);
 	T query_max(const size_t L, const size_t R);
 	T query_sum(const size_t L, const size_t R);
-        std::vector<T> query(const size_t L, const size_t R); 
+	std::vector<T> query(const size_t L, const size_t R);
 	~segmentTree();
 private:
 	size_t _size;
@@ -38,7 +38,7 @@ private:
 	void _query_helper(T* ret_val, bool* flag, const size_t idx, const size_t L, const size_t R);
 	void _assign_val(const size_t idx, const size_t L, const size_t R, const T& val);
 	void _assign_val(const size_t idx, const size_t L, const size_t R, const T&& val);
-	iterator _begin_ptr, _end_ptr;
+	//iterator _begin_ptr, _end_ptr;
 };
 
 template <typename T>
@@ -171,7 +171,7 @@ void segmentTree<T>::_set_helper(const size_t idx, const size_t L, const size_t 
 	if (L <= curr_L && curr_R <= R) {
 		root[idx]._max_val = val;
 		root[idx]._min_val = val;
-		root[idx]._sum_val = (curr_R - curr_L) * val;
+		root[idx]._sum_val =  (curr_R - curr_L) * val;
 		root[idx]._is_set = true;
 		root[idx]._set_val = val;
 	}
@@ -227,11 +227,11 @@ void segmentTree<T>::_set_helper(const size_t idx, const size_t L, const size_t 
 		if (L < mid) _set_helper(2 * idx + 1, L, R, val);
 		if (R > mid) _set_helper(2 * idx + 2, L, R, val);
 
-		if(root[2 * idx + 1]._)
-		if (root[2 * idx + 1]._max_val > root[2 * idx + 2]._max_val)
-			root[idx]._max_val = root[2 * idx + 1]._max_val;
-		else
-			root[idx]._max_val = root[2 * idx + 2]._max_val;
+		if (root[2 * idx + 1]._)
+			if (root[2 * idx + 1]._max_val > root[2 * idx + 2]._max_val)
+				root[idx]._max_val = root[2 * idx + 1]._max_val;
+			else
+				root[idx]._max_val = root[2 * idx + 2]._max_val;
 
 		if (root[2 * idx + 1]._min_val < root[2 * idx + 2]._min_val)
 			root[idx]._min_val = root[2 * idx + 1]._min_val;
@@ -276,8 +276,15 @@ segmentTree<T>::segmentTree(const std::vector<T>& vec) {
 }
 
 template<typename T>
+segmentTree<T>::segmentTree(segmentTree<T>&& tree) noexcept{
+	this->root = tree->root;
+	this->_size = tree->_size;
+	tree->root = NULL;
+}
+
+template<typename T>
 segmentTree<T>::~segmentTree() {
-	delete []root;
+	delete[]root;
 }
 
 template<typename T>
@@ -319,7 +326,7 @@ T segmentTree<T>::query_min(const size_t L, const size_t R)
 	bool flag = false;
 	_query_helper(ptr, &flag, 0, L, R);
 	int ret_val = ptr[0];
-	delete []ptr;
+	delete[]ptr;
 	return ret_val;
 }
 
@@ -331,7 +338,7 @@ T segmentTree<T>::query_max(const size_t L, const size_t R)
 	bool flag = false;
 	_query_helper(ptr, &flag, 0, L, R);
 	int ret_val = ptr[1];
-	delete []ptr;
+	delete[]ptr;
 	return ret_val;
 }
 
@@ -343,21 +350,21 @@ T segmentTree<T>::query_sum(const size_t L, const size_t R)
 	bool flag = false;
 	_query_helper(ptr, &flag, 0, L, R);
 	int ret_val = ptr[2];
-	delete []ptr;
+	delete[]ptr;
 	return ret_val;
 }
 
 template<typename T>
 std::vector<T> segmentTree<T>::query(const size_t L, const size_t R)
 {
-        if(L >= R) throw std::runtime_error("L must be smaller than R");
-        T* ptr = new T[3];
-        bool flag = false;
-        _query_helper(ptr, &flag, 0, L, R);
-        std::vector<T> vec;
-        vec.push_back(ptr[0]);
-        vec.push_back(ptr[1]);
-        vec.push_back(ptr[2]);
-        delete []ptr;
-        return vec;
+	if (L >= R) throw std::runtime_error("L must be smaller than R");
+	T* ptr = new T[3];
+	bool flag = false;
+	_query_helper(ptr, &flag, 0, L, R);
+	std::vector<T> vec;
+	vec.push_back(ptr[0]);
+	vec.push_back(ptr[1]);
+	vec.push_back(ptr[2]);
+	delete[]ptr;
+	return vec;
 }
