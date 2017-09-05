@@ -66,7 +66,7 @@ void check_segTree_int(vector<int>& vec, int test_round){
 int main() {
     int li_len = 1000000;
     int test_round = 1000;
-    ///Check T == INT
+ 
 	srand((unsigned)time(NULL));
 	vector<int> vec;
 	int rand_val;
